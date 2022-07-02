@@ -21,22 +21,22 @@
         <li class="nav-item dropdown">
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-list"></i><span>Aduan</span></a>
             <ul class="dropdown-menu">
-                <li class=""><a class="nav-link" href="#">List Aduan</a></li>
-                <li><a class="nav-link" href="#">Tambah Aduan</a></li>
+                <li class=""><a class="nav-link" href="{{ route('app.aduan.index') }}">List Aduan</a></li>
+                <li><a class="nav-link" href="{{ route('app.aduan.create') }}">Tambah Aduan</a></li>
             </ul>
         </li>
         <li class="nav-item dropdown">
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-wallet"></i><span>Pendanaan</span></a>
             <ul class="dropdown-menu">
-                <li class=""><a class="nav-link" href="#">List Dana</a></li>
-                <li><a class="nav-link" href="#">Tambah Pendanaan</a></li>
+                <li class=""><a class="nav-link" href="{{ route('app.dana.index') }}">List Dana</a></li>
+                <li><a class="nav-link" href="{{ route('app.dana.create') }}">Tambah Pendanaan</a></li>
             </ul>
         </li>
         <li class="nav-item dropdown">
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i><span>Data Warga</span></a>
             <ul class="dropdown-menu">
-                <li class=""><a class="nav-link" href="#">List Warga</a></li>
-                <li><a class="nav-link" href="#">Tambah Warga</a></li>
+                <li class=""><a class="nav-link" href="{{ route('app.warga.index') }}">List Warga</a></li>
+                <li><a class="nav-link" href="{{ route('app.warga.index') }}">Tambah Warga</a></li>
             </ul>
         </li>
         <li class="nav-item dropdown">
