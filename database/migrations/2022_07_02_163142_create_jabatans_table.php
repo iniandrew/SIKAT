@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\AnimalFeed;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('animal_feed_recipes', function (Blueprint $table) {
+        Schema::create('jabatans', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(AnimalFeed::class, 'animal_feed_id')->constrained();
-            $table->string('name')->nullable();
-            $table->text('description')->nullable();
-            $table->jsonb('details')->nullable();
+            $table->string('nama_jabatan')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('animal_feed_recipes');
+        Schema::dropIfExists('jabatans');
     }
 };

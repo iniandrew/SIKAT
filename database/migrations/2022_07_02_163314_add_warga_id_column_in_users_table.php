@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Animals\Animal;
+use App\Models\Warga;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,12 +14,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('animal_children', function (Blueprint $table) {
-            $table->id();
-            $table->foreignIdFor(Animal::class, 'animal_id')->constrained();
-            $table->string('name')->nullable();
-            $table->jsonb('details')->nullable();
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreignIdFor(Warga::class, 'warga_id')->nullable()->constrained();
         });
     }
 
@@ -30,6 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('animal_children');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };

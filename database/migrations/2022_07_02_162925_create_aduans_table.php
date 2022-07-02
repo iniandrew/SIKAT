@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,13 +14,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('settings', function (Blueprint $table) {
+        Schema::create('aduans', function (Blueprint $table) {
             $table->id();
-            $table->string('image')->nullable();
-            $table->string('name')->nullable();
-            $table->string('manager_name')->nullable();
-            $table->text('description')->nullable();
-            $table->text('address')->nullable();
+            $table->foreignIdFor(User::class, 'user_id')->constrained();
+            $table->string('judul_aduan')->nullable();
+            $table->text('isi_aduan')->nullable();
+            $table->string('status_aduan')->nullable();
+            $table->string('bukti_aduan')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('settings');
+        Schema::dropIfExists('aduans');
     }
 };

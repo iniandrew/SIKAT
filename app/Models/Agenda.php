@@ -5,7 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AnimalFeed extends Model
+class Agenda extends Model
 {
     use HasFactory;
+    protected $table = 'agendas';
+    protected $guarded = [];
 }

@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Models\Animals;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Children extends Model
+class Aduan extends Model
 {
     use HasFactory;
+
+    protected $table = 'aduans';
+    protected $guarded = [];
 }

@@ -5,7 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cage extends Model
+class AnggotaKeluarga extends Model
 {
     use HasFactory;
+
+    protected $table = 'anggota_keluargas';
+    protected $guarded = [];
 }
