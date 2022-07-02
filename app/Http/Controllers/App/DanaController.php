@@ -15,7 +15,7 @@ class DanaController extends Controller
      */
     public function index()
     {
-        //
+        return view($this->viewPath('index'));
     }
 
     /**
@@ -25,7 +25,7 @@ class DanaController extends Controller
      */
     public function create()
     {
-        //
+        return view($this->viewPath('create'));
     }
 
     /**
@@ -47,7 +47,7 @@ class DanaController extends Controller
      */
     public function show(Dana $dana)
     {
-        //
+        return view($this->viewPath('show'));
     }
 
     /**
@@ -58,7 +58,7 @@ class DanaController extends Controller
      */
     public function edit(Dana $dana)
     {
-        //
+        return view($this->viewPath('edit'));
     }
 
     /**
@@ -83,4 +83,10 @@ class DanaController extends Controller
     {
         //
     }
+
+    private function viewPath($path): string
+    {
+        return 'app.dana.' . $path;
+    }
+
 }

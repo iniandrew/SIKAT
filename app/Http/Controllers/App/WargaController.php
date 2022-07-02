@@ -15,7 +15,7 @@ class WargaController extends Controller
      */
     public function index()
     {
-        //
+        return view($this->viewPath('index'));
     }
 
     /**
@@ -25,7 +25,7 @@ class WargaController extends Controller
      */
     public function create()
     {
-        //
+        return view($this->viewPath('create'));
     }
 
     /**
@@ -47,7 +47,7 @@ class WargaController extends Controller
      */
     public function show(Warga $warga)
     {
-        //
+        return view($this->viewPath('show'));
     }
 
     /**
@@ -58,7 +58,7 @@ class WargaController extends Controller
      */
     public function edit(Warga $warga)
     {
-        //
+        return view($this->viewPath('edit'));
     }
 
     /**
@@ -82,5 +82,10 @@ class WargaController extends Controller
     public function destroy(Warga $warga)
     {
         //
+    }
+
+    private function viewPath($path): string
+    {
+        return 'app.warga.' . $path;
     }
 }

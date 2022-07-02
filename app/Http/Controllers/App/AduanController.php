@@ -11,11 +11,11 @@ class AduanController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
-        //
+        return view($this->viewPath('index'));
     }
 
     /**
@@ -25,7 +25,7 @@ class AduanController extends Controller
      */
     public function create()
     {
-        //
+        return view($this->viewPath('create'));
     }
 
     /**
@@ -47,7 +47,7 @@ class AduanController extends Controller
      */
     public function show(Aduan $aduan)
     {
-        //
+        return view($this->viewPath('show'));
     }
 
     /**
@@ -58,7 +58,7 @@ class AduanController extends Controller
      */
     public function edit(Aduan $aduan)
     {
-        //
+        return view($this->viewPath('edit'));
     }
 
     /**
@@ -82,5 +82,10 @@ class AduanController extends Controller
     public function destroy(Aduan $aduan)
     {
         //
+    }
+
+    private function viewPath($path): string
+    {
+        return 'app.aduan.' . $path;
     }
 }

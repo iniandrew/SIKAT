@@ -54,14 +54,16 @@
                                                     <form action="{{ route('app.agenda.destroy', $agenda) }}" method="post">
                                                         {{ csrf_field() }}
                                                         {{ method_field('DELETE') }}
-                                                        <button class="btn btn-danger" type="submit" data-toggle="tooltip" data-original-title="Hapus">
+                                                        <button id="btnDelete" onclick="deleteData()" class="btn btn-danger" data-toggle="tooltip" data-original-title="Hapus">
                                                             <i class="fas fa-trash"></i>
                                                         </button>
                                                     </form>
                                                 </td>
                                             </tr>
                                         @empty
-                                            Tidak ada data
+                                            <tr>
+                                                <td colspan="5" class="text-center">Tidak ada data</td>
+                                            </tr>
                                         @endforelse
                                     </tbody>
                                 </table>
@@ -90,3 +92,31 @@
         </div>
     </section>
 @endsection
+
+@push('js-libraries')
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@endpush
+
+@push('script')
+    <script>
+        function deleteData() {
+            swal({
+                title: "Apakah anda yakin?",
+                text: "Setelah dihapus, Anda tidak akan dapat mengembalikan data ini!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        document.getElementById('btnDelete').submit();
+                        swal("Poof! Your imaginary file has been deleted!", {
+                            icon: "success",
+                        });
+                    } else {
+                        swal("Your imaginary file is safe!");
+                    }
+                });
+        }
+    </script>
+@endpush
