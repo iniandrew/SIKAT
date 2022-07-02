@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\App\AduanController;
+use App\Http\Controllers\App\AgendaController;
+use App\Http\Controllers\App\DanaController;
+use App\Http\Controllers\App\WargaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +21,15 @@ use Illuminate\Support\Facades\Route;
 Route::redirect('/', 'login');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('app.dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::prefix('app/')->middleware('auth')->name('app.')->group(function () {
+    Route::get('dashboard', fn () => view('app/dashboard'))->name('dashboard');
+    Route::resource('agenda', AgendaController::class);
+    Route::resource('aduan', AduanController::class);
+    Route::resource('dana', DanaController::class);
+    Route::resource('warga', WargaController::class);
+});
 
 require __DIR__.'/auth.php';

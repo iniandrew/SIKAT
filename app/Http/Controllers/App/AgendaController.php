@@ -1,20 +1,38 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\App;
 
+use App\Http\Controllers\Controller;
 use App\Models\Agenda;
 use Illuminate\Http\Request;
 
 class AgendaController extends Controller
 {
+
+    private $rules = [
+        'judul_agenda' => 'required',
+        'isi_agenda' => 'required',
+        'foto' => 'nullable|images|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'tanggal_mulai_agenda' => 'nullable|date',
+        'tanggal_selesai_agenda' => 'nullable|date',
+        'tempat_agenda' => 'nullable',
+        'waktu_mulai' => 'nullable',
+        'waktu_selesai' => 'nullable',
+        'status_agenda' => 'nullable',
+    ];
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): \Illuminate\Http\Response|string
     {
-        //
+        $agendas = Agenda::query()->get();
+
+        return view($this->viewPath('index'), [
+            'pageTitle' => 'Agenda',
+            'agendas' => $agendas,
+        ]);
     }
 
     /**
@@ -22,20 +40,31 @@ class AgendaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): \Illuminate\Http\Response|string
     {
-        //
+        return view($this->viewPath('create'), [
+            'pageTitle' => 'Tambah Agenda',
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        //
+        $request->validate($this->rules);
+
+        $action = Agenda::query()->create([
+            'user_id' => auth()->user()->id,
+            ...$request->all()]
+        );
+
+        return $action
+            ? redirect()->route('app.agenda.index')->with('success', 'Data berhasil ditambahkan')
+            : redirect()->back()->with('error', 'Data gagal ditambahkan');
     }
 
     /**
@@ -80,6 +109,15 @@ class AgendaController extends Controller
      */
     public function destroy(Agenda $agenda)
     {
-        //
+        $action = $agenda->delete();
+
+        return $action
+            ? redirect()->route('app.agenda.index')->with('success', 'Data berhasil dihapus')
+            : redirect()->back()->with('error', 'Data gagal dihapus');
+    }
+
+    private function viewPath($path): string
+    {
+        return 'app.agenda.' . $path;
     }
 }
