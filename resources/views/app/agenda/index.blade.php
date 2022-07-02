@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@push('css-libraries')
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-select-bs4/1.4.0/select.bootstrap4.min.css">
+@endpush
+
 @section('content')
     <section class="section">
         <div class="section-header">
@@ -32,14 +38,14 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-md">
+                                <table class="table table-bordered table-md" id="tableAgenda">
                                     <thead>
                                         <tr>
                                             <th>No</th>
                                             <th>Judul</th>
                                             <th>Isi</th>
                                             <th>Status</th>
-                                            <th>Action</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -51,10 +57,10 @@
                                                 <td><div class="badge badge-success">Active</div></td>
                                                 <td style="display: flex" class="text-center">
                                                     <a href="{{ route('app.agenda.edit', $agenda) }}" data-toggle="tooltip" title="" class="btn btn-info btn-action mr-2" data-original-title="Ubah"><i class="fas fa-pencil-alt"></i></a>
-                                                    <form action="{{ route('app.agenda.destroy', $agenda) }}" method="post">
+                                                    <form action="{{ route('app.agenda.destroy', $agenda) }}" id="formDelete" method="post">
                                                         {{ csrf_field() }}
                                                         {{ method_field('DELETE') }}
-                                                        <button id="btnDelete" onclick="deleteData()" class="btn btn-danger" data-toggle="tooltip" data-original-title="Hapus">
+                                                        <button id="btnDelete" class="btn btn-danger" data-toggle="tooltip" data-original-title="Hapus">
                                                             <i class="fas fa-trash"></i>
                                                         </button>
                                                     </form>
@@ -69,23 +75,6 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="card-footer text-right">
-                            <nav class="d-inline-block">
-                                <ul class="pagination mb-0">
-                                    <li class="page-item disabled">
-                                        <a class="page-link" href="#" tabindex="-1"><i class="fas fa-chevron-left"></i></a>
-                                    </li>
-                                    <li class="page-item active"><a class="page-link" href="#">1 <span class="sr-only">(current)</span></a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">2</a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -95,11 +84,20 @@
 
 @push('js-libraries')
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="datatables.net-select-bs4/js/select.bootstrap4.min.js"></script>
 @endpush
 
 @push('script')
     <script>
-        function deleteData() {
+        $(document).ready(function () {
+            $('#tableAgenda').DataTable();
+        });
+
+        $('#btnDelete').click(function (e) {
+            var form = $(this).closest("#formDelete");
+            e.preventDefault();
             swal({
                 title: "Apakah anda yakin?",
                 text: "Setelah dihapus, Anda tidak akan dapat mengembalikan data ini!",
@@ -109,14 +107,14 @@
             })
                 .then((willDelete) => {
                     if (willDelete) {
-                        document.getElementById('btnDelete').submit();
-                        swal("Poof! Your imaginary file has been deleted!", {
+                        form.submit();
+                        swal("Data berhasil dihapus", {
                             icon: "success",
                         });
                     } else {
-                        swal("Your imaginary file is safe!");
+                        swal("Dibatalkan");
                     }
                 });
-        }
+        })
     </script>
 @endpush
