@@ -5,26 +5,37 @@ namespace App\Http\Controllers\App;
 use App\Http\Controllers\Controller;
 use App\Models\Dana;
 use Illuminate\Http\Request;
+use function PHPUnit\Framework\throwException;
+use Illuminate\Support\Facades\Gate;
 
 class DanaController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index(): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
-        return view($this->viewPath('index'));
+        $danas = Dana::query()->get();
+
+        return view($this->viewPath('index'), [
+            'pageTitle' => 'Dana',
+            'danas' => $danas,
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function create()
     {
+        if (! Gate::allows('create-dana')) {
+            return view('layouts.unauthorized');
+        }
+
         return view($this->viewPath('create'));
     }
 

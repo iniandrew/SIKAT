@@ -102,7 +102,7 @@
                 title: "Apakah anda yakin?",
                 text: "Setelah dihapus, Anda tidak akan dapat mengembalikan data ini!",
                 icon: "warning",
-                buttons: true,
+                buttons: ['Batal', 'Ya Hapus!'],
                 dangerMode: true,
             })
                 .then((willDelete) => {

@@ -3,24 +3,18 @@
 namespace App\Http\Controllers\App;
 
 use App\Http\Controllers\Controller;
-use App\Models\Aduan;
 use Illuminate\Http\Request;
 
-class AduanController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $aduans = Aduan::query()->latest()->get();
-
-        return view($this->viewPath('index'), [
-            'pageTitle' => 'Aduan',
-            'aduans' => $aduans,
-        ]);
+        //
     }
 
     /**
@@ -30,7 +24,7 @@ class AduanController extends Controller
      */
     public function create()
     {
-        return view($this->viewPath('create'));
+        //
     }
 
     /**
@@ -47,33 +41,33 @@ class AduanController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Aduan  $aduan
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Aduan $aduan)
+    public function show($id)
     {
-        return view($this->viewPath('show'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Aduan  $aduan
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Aduan $aduan)
+    public function edit($id)
     {
-        return view($this->viewPath('edit'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Aduan  $aduan
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Aduan $aduan)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -81,16 +75,11 @@ class AduanController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Aduan  $aduan
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Aduan $aduan)
+    public function destroy($id)
     {
         //
-    }
-
-    private function viewPath($path): string
-    {
-        return 'app.aduan.' . $path;
     }
 }

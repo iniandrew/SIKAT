@@ -36,7 +36,7 @@
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i><span>Data Warga</span></a>
             <ul class="dropdown-menu">
                 <li class="{{ request()->routeIs('app.warga.index') ? 'active' : '' }}"><a class="nav-link" href="{{ route('app.warga.index') }}">List Warga</a></li>
-                <li class="{{ request()->routeIs('app.warga.create') ? 'active' : '' }}"><a class="nav-link" href="{{ route('app.warga.index') }}">Tambah Warga</a></li>
+                <li class="{{ request()->routeIs('app.warga.create') ? 'active' : '' }}"><a class="nav-link" href="{{ route('app.warga.create') }}">Tambah Warga</a></li>
             </ul>
         </li>
         <li class="nav-item dropdown">
