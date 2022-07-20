@@ -1,9 +1,3 @@
-# Zoo Management - Unfined Variable
+# SIKAT - Sistem Informasi Kampung Digital
 
-### Teams 
-- Chrisdion Andrew
-- Herdianto Jeremi Bonte 
-- Frenda Maulana
-
-### Purpose
-Tujuan dibuatnya aplikasi ini adalah untuk melakukan management pada suatu kebun binatang agar lebih terstruktur.
+laravel w/ stisla
