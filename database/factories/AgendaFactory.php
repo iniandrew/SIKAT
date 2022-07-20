@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Agenda;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,6 +22,7 @@ class AgendaFactory extends Factory
             'judul_agenda' => $this->faker->text(50),
             'isi_agenda' => $this->faker->sentence(200),
             'tempat_agenda' => $this->faker->city,
+            'status_agenda' => $this->faker->randomElement([Agenda::STATUS_PUBLISHED, Agenda::STATUS_DRAFT]),
         ];
     }
 }

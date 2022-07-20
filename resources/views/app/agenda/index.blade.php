@@ -54,8 +54,11 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $agenda->judul_agenda }}</td>
                                                 <td>{!! $agenda->isi_agenda !!}</td>
-                                                <td><div class="badge badge-success">Active</div></td>
+                                                <td>
+                                                    <div class="badge badge-success">Diterbitkan</div>
+                                                </td>
                                                 <td style="display: flex" class="text-center">
+                                                    <a href="{{ route('app.agenda.show', $agenda) }}" data-toggle="tooltip" title="" class="btn btn-warning btn-warning mr-2" data-original-title="Lihat Detail"><i class="fas fa-eye"></i></a>
                                                     <a href="{{ route('app.agenda.edit', $agenda) }}" data-toggle="tooltip" title="" class="btn btn-info btn-action mr-2" data-original-title="Ubah"><i class="fas fa-pencil-alt"></i></a>
                                                     <form action="{{ route('app.agenda.destroy', $agenda) }}" id="formDelete" method="post">
                                                         {{ csrf_field() }}

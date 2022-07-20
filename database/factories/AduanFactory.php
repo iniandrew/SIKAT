@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Aduan;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,7 +21,7 @@ class AduanFactory extends Factory
             'user_id' => $this->faker->numberBetween(1, 4),
             'judul_aduan' => $this->faker->text(50),
             'isi_aduan' => $this->faker->sentence(100),
-            'status_aduan' => $this->faker->randomElement(['Ditanggapi', 'Diproses', 'Ditolak', 'Diterima']),
+            'status_aduan' => $this->faker->randomElement([Aduan::STATUS_NEED_REVIEW, Aduan::STATUS_REJECTED, Aduan::STATUS_APPROVED]),
         ];
     }
 }

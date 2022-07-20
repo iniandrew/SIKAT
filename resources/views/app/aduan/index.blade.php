@@ -34,7 +34,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h4>Data {{ $pageTitle }} &mdash; </h4>
-                            <a href="{{ route('app.agenda.create') }}" class="btn btn-primary">Tambah Agenda</a>
+                            <a href="{{ route('app.aduan.create') }}" class="btn btn-primary">Tambah {{ $pageTitle }}</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -56,12 +56,21 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $aduan->judul_aduan }}</td>
                                             <td>{!! $aduan->isi_aduan !!}</td>
-                                            <td><div class="badge badge-success">Active</div></td>
+                                            <td>
+                                                @if($aduan->status_aduan === 'need_review')
+                                                    <span class="badge badge-warning">{{ $aduan->status }}</span>
+                                                @elseif($aduan->status_aduan === 'approved')
+                                                    <span class="badge badge-success">{{ $aduan->status }}</span>
+                                                @else
+                                                    <span class="badge badge-danger">{{ $aduan->status }}</span>
+                                                @endif
+                                            </td>
                                             <td>{{ $aduan->user->name }}</td>
                                             <td>{{ $aduan->created_at }}</td>
                                             <td style="display: flex" class="text-center">
-                                                <a href="{{ route('app.agenda.edit', $aduan) }}" data-toggle="tooltip" title="" class="btn btn-info btn-action mr-2" data-original-title="Ubah"><i class="fas fa-pencil-alt"></i></a>
-                                                <form action="{{ route('app.agenda.destroy', $aduan) }}" id="formDelete" method="post">
+                                                <a href="{{ route('app.aduan.show', $aduan) }}" data-toggle="tooltip" title="" class="btn btn-warning btn-warning mr-2" data-original-title="Lihat Detail"><i class="fas fa-eye"></i></a>
+                                                <a href="{{ route('app.aduan.edit', $aduan) }}" data-toggle="tooltip" title="" class="btn btn-info btn-action mr-2" data-original-title="Ubah"><i class="fas fa-pencil-alt"></i></a>
+                                                <form action="{{ route('app.aduan.destroy', $aduan) }}" id="formDelete" method="post">
                                                     {{ csrf_field() }}
                                                     {{ method_field('DELETE') }}
                                                     <button id="btnDelete" class="btn btn-danger" data-toggle="tooltip" data-original-title="Hapus">

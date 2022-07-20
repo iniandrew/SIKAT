@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class, 'user_id')->constrained();
             $table->string('judul_aduan')->nullable();
             $table->text('isi_aduan')->nullable();
-            $table->string('status_aduan')->nullable();
+            $table->string('status_aduan')->default('perlu_ditinjau');
             $table->string('bukti_aduan')->nullable();
             $table->timestamps();
         });

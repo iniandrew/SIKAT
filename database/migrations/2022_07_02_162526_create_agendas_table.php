@@ -17,11 +17,10 @@ return new class extends Migration
         Schema::create('agendas', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class, 'user_id')->constrained();
-            $table->string('judul_agenda')->nullable();
-            $table->text('isi_agenda')->nullable();
+            $table->string('judul_agenda');
+            $table->text('isi_agenda');
             $table->date('tanggal_mulai_agenda')->nullable();
             $table->date('tanggal_selesai_agenda')->nullable();
-            $table->string('foto_agenda')->nullable();
             $table->string('tempat_agenda')->nullable();
             $table->string('waktu_mulai')->nullable();
             $table->string('waktu_selesai')->nullable();

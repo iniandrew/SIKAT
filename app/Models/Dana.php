@@ -13,6 +13,9 @@ class Dana extends Model
     protected $table = 'danas';
     protected $guarded = [];
 
+    PUBLIC CONST CATEGORY_INCOME = 'income';
+    PUBLIC CONST CATEGORY_OUTCOME = 'outcome';
+
     public function getTransactionDateAttribute(): string
     {
         return Carbon::parse($this->attributes['tgl_transaksi'])->translatedFormat('d F Y');
@@ -21,5 +24,10 @@ class Dana extends Model
     public function getAmountAttribute(): string
     {
         return number_format($this->attributes['total'], 0, ',','.');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

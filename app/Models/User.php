@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Aduan::class);
     }
+
+    public function jabatan(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Jabatan::class, 'jabatan_id');
+    }
 }

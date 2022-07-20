@@ -35,46 +35,48 @@
                             <h4>Form {{ $pageTitle }}</h4>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('app.agenda.store') }}" method="POST" class="needs-validation" novalidate="">
+                            <form action="{{ route('app.agenda.update', $agenda) }}" method="POST" class="needs-validation" novalidate="">
                                 @csrf
-                                @method('POST')
+                                @method('PATCH')
 
                                 <div class="form-group">
                                     <label>Judul Agenda</label>
-                                    <input type="text" name="judul_agenda" class="form-control" placeholder="Masukan judul agenda" required>
+                                    <input type="text" name="judul_agenda" class="form-control" placeholder="Masukan judul agenda" value="{{ $agenda->judul_agenda }}" required>
                                     <div class="invalid-feedback">
                                         Isian judul agenda harus diisi!
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Isi Agenda</label>
-                                    <textarea class="summernote-simple" name="isi_agenda" placeholder="Masukan isi agenda" required></textarea>
+                                    <textarea class="summernote-simple" name="isi_agenda" placeholder="Masukan isi agenda" required>
+                                        {{ $agenda->isi_agenda }}
+                                    </textarea>
                                     <div class="invalid-feedback">
                                         Isian isi agenda harus diisi!
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputAddress">Tempat Agenda</label>
-                                    <input type="text" class="form-control" name="tempat_agenda" placeholder="Masukan tempat agenda">
+                                    <input type="text" class="form-control" name="tempat_agenda" placeholder="Masukan tempat agenda" value="{{ $agenda->tempat_agenda }}">
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label>Tanggal Mulai</label>
-                                        <input type="date" name="tanggal_mulai_agenda" class="form-control">
+                                        <input type="date" name="tanggal_mulai_agenda" class="form-control" value="{{ $agenda->tanggal_mulai_agenda }}">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label>Tanggal Selesai</label>
-                                        <input type="date" name="tanggal_selesai_agenda" class="form-control">
+                                        <input type="date" name="tanggal_selesai_agenda" class="form-control" value="{{ $agenda->tanggal_selesai_agenda }}">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label>Waktu Mulai</label>
-                                        <input type="time" name="waktu_mulai" class="form-control">
+                                        <input type="time" name="waktu_mulai" class="form-control" value="{{ $agenda->waktu_mulai }}">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label>Waktu Mulai</label>
-                                        <input type="time" name="waktu_selesai" class="form-control">
+                                        <input type="time" name="waktu_selesai" class="form-control" value="{{ $agenda->waktu_selesai }}">
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -82,8 +84,8 @@
                                         <label>Status</label>
                                         <select name="status_agenda" class="form-control" required>
                                             <option value="">Pilih Status Agenda</option>
-                                            <option value="published">Diterbitkan</option>
-                                            <option value="draft">Draft</option>
+                                            <option value="published" @if($agenda->status_agenda == 'published') selected @endif>Diterbitkan</option>
+                                            <option value="draft" @if($agenda->status_agenda == 'draft') selected @endif>Draft</option>
                                         </select>
                                         <div class="invalid-feedback">
                                             Isian status agenda harus diisi!
